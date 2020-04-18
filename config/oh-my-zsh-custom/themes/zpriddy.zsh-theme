@@ -48,10 +48,14 @@ local exit_code="%(?,,C:%{$fg[red]%}%?%{$reset_color%})"
 # $
 # %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \ 
 
+local pyenv_prompt_info='$(pyenv_prompt_info)'
+
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
 PROMPT="
 %{$fg[white]%}[%*] \
 %{$terminfo[bold]$fg[blue]%}%~%{$reset_color%} \
-${git_info} [pyenv:%{$fg[green]%}$(pyenv_prompt_info)%{$reset_color%}]\
+${git_info} [pyenv:%{$fg[green]%}${pyenv_prompt_info}%{$reset_color%}]\
  \
 $exit_code
 %(#,%{$bg[yellow]%}%{$fg[black]%}%n%{$reset_color%},%{$fg[cyan]%}%n) \
