@@ -46,12 +46,15 @@ local exit_code="%(?,,C:%{$fg[red]%}%?%{$reset_color%})"
 #
 # % ys @ ys-mbp in ~/.oh-my-zsh on git:master x [21:47:42] C:0
 # $
+# %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \ 
+
 PROMPT="
 %{$fg[white]%}[%*] \
-%{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
-%{$terminfo[bold]$fg[yellow]%}%~%{$reset_color%} \
+%{$terminfo[bold]$fg[blue]%}%~%{$reset_color%} \
 ${git_info} [pyenv:%{$fg[green]%}$(pyenv_prompt_info)%{$reset_color%}]\
  \
 $exit_code
 %(#,%{$bg[yellow]%}%{$fg[black]%}%n%{$reset_color%},%{$fg[cyan]%}%n) \
 %{$terminfo[bold]$fg[green]%}>> %{$reset_color%}"
+
+RPROMPT="%{$FG[145]%}[%h]%{$reset_color%}"

@@ -112,6 +112,7 @@ alias zshconfig="vim ~/.zshrc"
 # Hide ZSH '%'
 PROMPT_EOL_MARK=''
 
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # pyenv 
 if command -v pyenv 1>/dev/null 2>&1; then
