@@ -1,6 +1,10 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Custom Config Path
+export ZSH_CUSTOM="/Users/zpriddy/.config/oh-my-zsh-custom"
+
+
 export ZSH_AUTOSUGGEST_STRATEGY="default"
 export PATH="$PATH:/Users/zpriddy/bin:/Users/zpriddy/.oh-my-zsh"
 
@@ -12,7 +16,7 @@ export ZSH="/Users/zpriddy/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="gallifrey"
+ZSH_THEME="zpriddy"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -72,7 +76,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git pip osx python sudo cp terraform)
+plugins=(git pip osx python sudo cp pyenv)
 # plugins=(terraform)
 
 source $ZSH/oh-my-zsh.sh
@@ -107,3 +111,11 @@ alias zshconfig="vim ~/.zshrc"
 
 # Hide ZSH '%'
 PROMPT_EOL_MARK=''
+
+
+# pyenv 
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+eval "$(pyenv virtualenv-init -)"
+
