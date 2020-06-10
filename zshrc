@@ -1,5 +1,16 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
 
 # Custom Config Path
 export ZSH_CUSTOM="/Users/zpriddy/.config/oh-my-zsh-custom"
@@ -16,7 +27,8 @@ export ZSH="/Users/zpriddy/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="zpriddy"
+# ZSH_THEME="zpriddy"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -97,6 +109,9 @@ source $ZSH/oh-my-zsh.sh
 
 alias zshconfig="vim ~/.zshrc"
 
+# Rehash if command not found
+zstyle ":completion:*:commands" rehash 1
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -114,9 +129,32 @@ PROMPT_EOL_MARK=''
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
+alias dc="docker-compose"
+
 # pyenv 
+
+
+
+function tox {
+	PYENV=/usr/local/bin/pyenv
+	if [[ ! -v TOX_PATH && -x $PYENV ]]; then
+		for pyv in $(pyenv versions --bare | sort -g -r); do
+			#echo $pyv
+			TOX_PATH="$(pyenv prefix $pyv)/bin:$TOX_PATH"
+		done
+	fi
+
+	export TOX_PATH=$TOX_PATH
+
+	env PATH="$TOX_PATH:$PATH" tox $@
+}
+
+# pyenv
 if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+	eval "$(pyenv init -)"
 fi
+
 eval "$(pyenv virtualenv-init -)"
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
